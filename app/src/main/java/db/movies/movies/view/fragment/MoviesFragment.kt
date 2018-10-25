@@ -14,6 +14,7 @@ import db.movies.movies.enums.GenresMoviesEnum
 import db.movies.movies.model.Movie
 import db.movies.movies.remote.MoviesService
 import db.movies.movies.remote.RetrofitClient
+import db.movies.movies.utils.InfiniteScrollListener
 import db.movies.movies.view.activity.DetailActivity
 import db.movies.movies.view.adapter.MoviesAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -28,45 +29,67 @@ interface MoviesDelegate{
 class MoviesFragment : Fragment(), MoviesDelegate {
     lateinit var idGenre : GenresMoviesEnum
     lateinit var moviesAdapter: MoviesAdapter
+    private var offset = 1
+    private var totalPaginas = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?)
             = inflater?.inflate(R.layout.fragment_movies, container, false)
 
-    override fun onStart() {
-        super.onStart()
-        moviesAdapter.movies = ArrayList()
-        movies_list.adapter!!.notifyDataSetChanged()
-    }
+    override fun onResume() {
+        super.onResume()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         moviesAdapter = MoviesAdapter(this)
+
+        moviesAdapter.movies = ArrayList()
 
         movies_list.apply {
             this.layoutManager = LinearLayoutManager(activity)
             this.layoutManager = GridLayoutManager(context, 2)
             this.adapter = moviesAdapter
+
         }
 
+        movies_list.adapter!!.notifyDataSetChanged()
 
+        movies_list.addOnScrollListener(object : InfiniteScrollListener(){
+            override fun onLoadMore() {
+                if(offset < totalPaginas){
+                    offset++
+                    presenterGetData()
+                }
+            }
+        })
         //mover pro presenters
+        presenterGetData()
+    }
+
+    private fun presenterGetData() {
         RetrofitClient.getRetrofit().create(MoviesService::class.java)
-                .getMoviesByGenre(idGenre.id, 1).subscribeOn(Schedulers.io())
+                .getMoviesByGenre(idGenre.id, offset).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { print("INICIOU") }
-                .doFinally { print("Finalizou") }
+                .doOnSubscribe { "startloading" }
+                .doFinally { "fim loading" }
                 .subscribe {
                     if (it.isSuccessful) {
                         moviesAdapter.movies.addAll(it.body()?.movies!!)
+                        offset = it?.body()!!.page
+                        totalPaginas = it?.body()!!.total_pages
                         moviesAdapter.notifyDataSetChanged()
-                    }
-                    else Log.i("Teste", it.errorBody().toString())
+
+                    } else Log.i("Teste", it.errorBody().toString())
                 }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
 
     companion object {
         fun newInstance(idGenre: Int): MoviesFragment {
             val fragment = MoviesFragment()
+            fragment.offset = 1
+            fragment.totalPaginas =1
             fragment.idGenre = GenresMoviesEnum.valor(idGenre)
             return fragment
         }

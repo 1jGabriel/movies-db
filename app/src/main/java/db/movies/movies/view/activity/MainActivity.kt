@@ -16,7 +16,7 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,31 +35,22 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
-
+                tab.position
             }
 
             override fun onTabReselected(tab: TabLayout.Tab) {
-
+                tab.position
             }
         })
     }
 
     override fun onResume() {
         super.onResume()
-        getMovies()
     }
 
     private fun getMovies() {
         if (hasConnection()) {
-            RetrofitClient.getRetrofit().create(MoviesService::class.java)
-                    .getMoviesByGenre(GenresMoviesEnum.ACAO.id, 1).subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnSubscribe { print("INICIOU") }
-                    .doFinally { print("Finalizou") }
-                    .subscribe {
-                        if (it.isSuccessful) Log.i("Teste", it.body().toString())
-                        else Log.i("Teste", it.errorBody().toString())
-                    }
+
         } else {
             alertNoConnection()
         }

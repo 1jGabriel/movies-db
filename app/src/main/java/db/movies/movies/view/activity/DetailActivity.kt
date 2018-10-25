@@ -1,20 +1,20 @@
 package db.movies.movies.view.activity
 
-import android.app.Activity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import db.movies.movies.BuildConfig
 import db.movies.movies.R
 import db.movies.movies.model.Movie
 import kotlinx.android.synthetic.main.activity_detail.*
 
-class DetailActivity : Activity() {
+class DetailActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        var movie = intent.extras["movieClicked"] as Movie
+        val movie = intent.extras["movieClicked"] as Movie
 
         description_txt.text = movie.overview
 
