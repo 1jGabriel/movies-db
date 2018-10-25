@@ -3,7 +3,7 @@
     android:layout_width="160dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_parent"
-    android:layout_margin="4dp"
+    android:layout_margin="8dp"
     android:layout_height="wrap_content">
 
     <android.support.constraint.ConstraintLayout
@@ -11,6 +11,7 @@
         android:id="@+id/cl_card"
         android:layout_height="wrap_content">
         <ImageView
+            android:scaleType="fitXY"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +27,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/movie_name"
-            android:text="Mad Max"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
