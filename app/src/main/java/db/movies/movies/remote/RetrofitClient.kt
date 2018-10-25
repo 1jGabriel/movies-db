@@ -1,6 +1,8 @@
-package db.movies.movies.remote
+package db.movies.movies.remotey
 
 import db.movies.movies.BuildConfig
+import db.movies.movies.remote.MoviesService
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.Retrofit
@@ -8,6 +10,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitClient {
     companion object {
+
+
         private val httpClient = OkHttpClient.Builder()
                 .addInterceptor { chain ->
                     val original = chain.request()
@@ -27,5 +31,7 @@ class RetrofitClient {
                     .baseUrl(BuildConfig.SERVER_URL)
                     .client(httpClient)
                     .build()
+
+        fun getClient() = getRetrofit().create(MoviesService::class.java)
     }
 }

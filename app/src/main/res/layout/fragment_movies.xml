@@ -12,4 +12,22 @@
         android:layout_width="match_parent"
         android:layout_marginBottom="40dp"
         android:layout_height="match_parent"/>
+
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:elevation="78dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        android:indeterminateTint="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
 </android.support.constraint.ConstraintLayout>

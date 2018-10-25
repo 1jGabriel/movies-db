@@ -3,17 +3,11 @@ package db.movies.movies.view.activity
 import android.app.AlertDialog
 import android.content.Context
 import android.net.ConnectivityManager
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
-import android.util.Log
 import db.movies.movies.R
 import db.movies.movies.enums.GenresMoviesEnum
-import db.movies.movies.remote.MoviesService
-import db.movies.movies.remote.RetrofitClient
 import db.movies.movies.view.adapter.GenresTabAdapter
-import io.reactivex.schedulers.Schedulers
-import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -44,9 +38,6 @@ class MainActivity : BaseActivity() {
         })
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
 
     private fun getMovies() {
         if (hasConnection()) {
