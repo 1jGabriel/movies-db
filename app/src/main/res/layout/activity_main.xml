@@ -23,10 +23,10 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"
             app:tabIndicatorColor="@color/tabIndicator"
-            app:tabPaddingBottom="12dp"
-            app:tabIndicatorHeight="2dp"
-
-            app:tabTextColor="@android:color/white"
+            app:tabPaddingBottom="4dp"
+            app:tabIndicatorHeight="4dp"
+            app:tabSelectedTextColor="@android:color/white"
+            app:tabTextColor="@android:color/secondary_text_dark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabGravity="fill"

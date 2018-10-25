@@ -43,7 +43,6 @@ class MoviesFragment : Fragment(), MoviesDelegate {
         moviesAdapter.movies = ArrayList()
 
         movies_list.apply {
-            this.layoutManager = LinearLayoutManager(activity)
             this.layoutManager = GridLayoutManager(context, 2)
             this.adapter = moviesAdapter
 
