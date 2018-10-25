@@ -14,12 +14,12 @@ class DetailActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        var movie = intent.extras["movie"] as Movie
+        var movie = intent.extras["movieClicked"] as Movie
 
         description_txt.text = movie.overview
 
         Picasso.get().load(BuildConfig.SERVER_URL_IMAGE + movie.poster_path).into(poster_movie)
 
-        title= movie.title
+        title = movie.title
     }
 }
