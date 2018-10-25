@@ -1,15 +1,13 @@
 package db.movies.movies.view.adapter
 
-import android.content.Context
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import db.movies.movies.enums.GenresMoviesEnum
 import db.movies.movies.view.fragment.MoviesFragment
 
-class GenresTabAdapter (fm: FragmentManager, context: Context, id: Int) : FragmentPagerAdapter(fm)  {
+class GenresTabAdapter (fm: FragmentManager) : FragmentPagerAdapter(fm)  {
 
-    override fun getItem(position: Int): Fragment? = when (position) {
+    override fun getItem(position: Int) = when (position) {
         0 -> MoviesFragment.newInstance(GenresMoviesEnum.ACAO.id)
         1 -> MoviesFragment.newInstance(GenresMoviesEnum.DRAMA.id)
         2 -> MoviesFragment.newInstance(GenresMoviesEnum.FANTASIA.id)
@@ -17,7 +15,7 @@ class GenresTabAdapter (fm: FragmentManager, context: Context, id: Int) : Fragme
         else -> MoviesFragment.newInstance(GenresMoviesEnum.ACAO.id)
     }
 
-    override fun getPageTitle(position: Int): CharSequence = when (position) {
+    override fun getPageTitle(position: Int) = when (position) {
         0 -> GenresMoviesEnum.ACAO.title
         1 -> GenresMoviesEnum.DRAMA.title
         2 -> GenresMoviesEnum.FANTASIA.title

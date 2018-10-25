@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import com.squareup.picasso.Picasso
 import db.movies.movies.BuildConfig
 import db.movies.movies.R
@@ -17,7 +19,7 @@ class MoviesAdapter(val delegates : MoviesDelegate) : RecyclerView.Adapter<Movie
         this.notifyDataSetChanged()
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.movie_list_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_list_item, parent, false)
         return MoviesViewHolder(view)
     }
 
@@ -27,17 +29,16 @@ class MoviesAdapter(val delegates : MoviesDelegate) : RecyclerView.Adapter<Movie
         val movie = movies[position]
         holder.titleMovie.text = movie.title
         Picasso.get()
-                .load(BuildConfig.SERVER_URL_IMAGE + movie.poster_path).error(R.drawable.ic_movies)
+                .load(BuildConfig.SERVER_URL_IMAGE + movie.posterPath).error(R.drawable.ic_movies)
                 .into(holder.posterMovie)
 
-        holder?.itemView.setOnClickListener {
+        holder.itemView.setOnClickListener {
             delegates.detailMovie(movie)
         }
-
     }
 
     inner class MoviesViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        val posterMovie = view.movie_img
-        val titleMovie = view.movie_name
+        val posterMovie: ImageView = view.movie_img
+        val titleMovie: TextView = view.movie_name
     }
 }
