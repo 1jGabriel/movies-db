@@ -58,11 +58,11 @@ class MainActivity : BaseActivity() {
 
     private fun alertNoConnection() {
         val dialogLogout = AlertDialog.Builder(this)
-        dialogLogout.setTitle("Atenção")
-        dialogLogout.setMessage("Sem conexão")
-        dialogLogout.setPositiveButton("Tente novamente",
-                { _, _ -> onResume() })
-        dialogLogout.setNegativeButton(android.R.string.cancel, { _, _ -> finish() })
+        dialogLogout.setTitle(getString(R.string.atencao))
+        dialogLogout.setMessage(getString(R.string.sem_conexao))
+        dialogLogout.setPositiveButton(getString(R.string.tente_novamente)
+        ) { _, _ -> onResume() }
+        dialogLogout.setNegativeButton(android.R.string.cancel) { _, _ -> finish() }
         dialogLogout.show()
     }
 }

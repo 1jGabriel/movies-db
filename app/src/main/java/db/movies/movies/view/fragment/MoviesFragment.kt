@@ -28,25 +28,29 @@ interface MoviesDelegate{
 
 class MoviesFragment : Fragment(), MoviesDelegate, MoviesContract.View {
 
-
     lateinit var idGenre : GenresMoviesEnum
     lateinit var moviesAdapter: MoviesAdapter
     private var offset = 1
-    private var totalPaginas = 1
+    private var totalPages = 1
+
     private var moviesPresenter = MoviesPresenter(this)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?)=
-            inflater?.inflate(R.layout.fragment_movies, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View
+            = inflater.inflate(R.layout.fragment_movies, container, false)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
         setListeners()
+        getDataFromServer()
+    }
+
+    private fun getDataFromServer() {
         moviesPresenter.requestDataFromServer(idGenre.id)
     }
 
-    fun initView(){
+    private fun initView(){
         moviesAdapter = MoviesAdapter(this)
         moviesAdapter.movies = ArrayList()
         movies_list.adapter = moviesAdapter
@@ -54,12 +58,19 @@ class MoviesFragment : Fragment(), MoviesDelegate, MoviesContract.View {
         movies_list.itemAnimator = DefaultItemAnimator()
     }
 
-    fun setListeners(){
+    private fun setListeners(){
         movies_list.addOnScrollListener(object : InfiniteScrollListener(){
             override fun onLoadMore() {
-                if(offset < totalPaginas){
-                    offset++
-                    moviesPresenter.getMoreData(offset, idGenre.id)
+                verifyPagination(offset, totalPages)
+            }
+
+            private fun verifyPagination(offset: Int, totalPages: Int) {
+                if (offset < totalPages) {
+                    if (moviesAdapter.movies.size == 0) {
+                        getDataFromServer()
+                    } else {
+                        moviesPresenter.getMoreData(offset +1 , idGenre.id)
+                    }
                 }
             }
         })
@@ -68,8 +79,6 @@ class MoviesFragment : Fragment(), MoviesDelegate, MoviesContract.View {
     companion object {
         fun newInstance(idGenre: Int): MoviesFragment {
             val fragment = MoviesFragment()
-            fragment.offset = 1
-            fragment.totalPaginas =1
             fragment.idGenre = GenresMoviesEnum.valor(idGenre)
             return fragment
         }
@@ -89,10 +98,16 @@ class MoviesFragment : Fragment(), MoviesDelegate, MoviesContract.View {
         hideView(loading)
     }
 
-    override fun setDataToRecyclerView(movies: ArrayList<Movie>) {
+    override fun setDataToRecyclerView(movies: ArrayList<Movie>, page: Int, totalPages: Int, genre: Int) {
+        setParametersPagination(page, totalPages)
         moviesAdapter.movies.addAll(movies)
         moviesAdapter.notifyDataSetChanged()
         hideProgress()
+    }
+
+    private fun setParametersPagination(page: Int, totalPages: Int) {
+        offset = page
+        this.totalPages = totalPages
     }
 
     override fun onResponseFailure(t: Throwable) {

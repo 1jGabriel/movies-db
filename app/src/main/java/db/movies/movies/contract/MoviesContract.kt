@@ -3,33 +3,24 @@ package db.movies.movies.contract
 import db.movies.movies.model.Movie
 
 interface MoviesContract {
-
     interface Model{
-
-        interface onFinishedListener{
-            fun onFinished(movies : ArrayList<Movie> )
+        interface OnFinishedListener{
+            fun onFinished(movies: ArrayList<Movie>, page: Int, totalPages: Int, genre: Int)
             fun onFailure(t : Throwable)
         }
-        fun getMovies(onFinishedListener : onFinishedListener, page : Int, genre : Int)
+        fun getMovies(OnFinishedListener : OnFinishedListener, page : Int, genre : Int)
     }
 
     interface View{
         fun showProgress()
         fun hideProgress()
-
-        fun setDataToRecyclerView(movies: ArrayList<Movie>)
-
+        fun setDataToRecyclerView(movies: ArrayList<Movie>, page: Int, totalPages: Int, genre: Int)
         fun onResponseFailure(t: Throwable)
 
     }
 
     interface Presenter {
-
-        fun onDestroy()
-
         fun getMoreData(page: Int, genre: Int)
-
         fun requestDataFromServer(genre: Int)
-
     }
 }

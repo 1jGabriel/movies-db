@@ -6,14 +6,18 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class MoviesListModel : MoviesContract.Model {
-    override fun getMovies(onFinishedListener: MoviesContract.Model.onFinishedListener, page: Int, genre: Int) {
+    override fun getMovies(OnFinishedListener: MoviesContract.Model.OnFinishedListener, page: Int, genre: Int) {
         RetrofitClient.getClient()
                 .getMoviesByGenre(genre, page).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({
-                    onFinishedListener.onFinished(it.body()?.movies ?: arrayListOf())
+                    OnFinishedListener.onFinished(
+                            it.body()?.movies ?: arrayListOf(),
+                            it.body()?.page ?: 1,
+                            it.body()?.totalPages ?: 1,
+                            genre)
                 },{
-                    onFinishedListener.onFailure(it)
+                    OnFinishedListener.onFailure(it)
                 })
     }
 

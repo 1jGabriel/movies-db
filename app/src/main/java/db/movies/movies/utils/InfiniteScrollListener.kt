@@ -3,14 +3,11 @@ package db.movies.movies.utils
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 
-public abstract class InfiniteScrollListener
+abstract class InfiniteScrollListener
     : RecyclerView.OnScrollListener() {
 
-    var mPreviousTotal = 0
-    /**
-     * True if we are still waiting for the last set of data to load.
-     */
-    var mLoading = true
+    private var mPreviousTotal = 0
+    private var mLoading = true
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)

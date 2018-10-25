@@ -1,7 +1,6 @@
 package db.movies.movies.view.activity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import db.movies.movies.BuildConfig
 import db.movies.movies.R
@@ -18,7 +17,7 @@ class DetailActivity : BaseActivity() {
 
         description_txt.text = movie.overview
 
-        Picasso.get().load(BuildConfig.SERVER_URL_IMAGE + movie.poster_path).into(poster_movie)
+        Picasso.get().load(BuildConfig.SERVER_URL_IMAGE + movie.posterPath).into(poster_movie)
 
         title = movie.title
     }
