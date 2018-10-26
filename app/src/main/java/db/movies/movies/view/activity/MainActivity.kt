@@ -32,33 +32,4 @@ class MainActivity : BaseActivity() {
         }
 
     }
-
-
-    private fun getMovies() {
-        if (hasConnection()) {
-
-        } else {
-            alertNoConnection()
-        }
-    }
-
-    private fun hasConnection(): Boolean {
-        val connectivityManager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork = connectivityManager.activeNetworkInfo
-
-        return (activeNetwork != null &&
-                (activeNetwork.type == ConnectivityManager.TYPE_WIFI ||
-                        activeNetwork.type == ConnectivityManager.TYPE_MOBILE))
-    }
-
-    private fun alertNoConnection() {
-        val dialogLogout = AlertDialog.Builder(this)
-        dialogLogout.setTitle(getString(R.string.atencao))
-        dialogLogout.setMessage(getString(R.string.sem_conexao))
-        dialogLogout.setPositiveButton(getString(R.string.tente_novamente)
-        ) { _, _ -> onResume() }
-        dialogLogout.setNegativeButton(android.R.string.cancel) { _, _ -> finish() }
-        dialogLogout.show()
-    }
-
 }
