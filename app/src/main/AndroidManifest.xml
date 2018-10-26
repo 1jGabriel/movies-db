@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".view.activity.MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.activity.SplashActivity"
             android:noHistory="true"
@@ -30,7 +30,7 @@
             android:parentActivityName=".view.activity.MainActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".view.activity.SearchActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
