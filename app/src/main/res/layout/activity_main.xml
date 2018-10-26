@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:backgroundTint="@color/gray_bg"
     android:layout_height="match_parent"
     tools:context=".view.activity.MainActivity">
 
@@ -23,10 +24,10 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"
             app:tabIndicatorColor="@color/tabIndicator"
-            app:tabPaddingBottom="4dp"
-            app:tabIndicatorHeight="4dp"
+            app:tabPaddingBottom="@dimen/margin_4"
+            app:tabIndicatorHeight="@dimen/margin_4"
             app:tabSelectedTextColor="@android:color/white"
-            app:tabTextColor="@android:color/secondary_text_dark"
+            app:tabTextColor="@color/orange_disable_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabGravity="fill"

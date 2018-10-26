@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#FF822B</color>
-    <color name="colorPrimaryDark">#DC651C</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimaryDark">#D56700</color>
+    <color name="colorAccent">#FF822B</color>
     <color name="tabIndicator">#fec80e</color>
+    <color name="gray_search">#808080</color>
+    <color name="gray_close">#A29E9F</color>
+    <color name="gray_bg">#F4F4F4</color>
+    <color name="orange_disable_tab">#FECEA0</color>
 </resources>

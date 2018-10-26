@@ -12,8 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".view.activity.SplashActivity"
             android:noHistory="true"
@@ -24,11 +25,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".view.activity.DetailActivity"
-            android:theme="@style/AppTheme"
+        <activity
+            android:name=".view.activity.DetailActivity"
             android:parentActivityName=".view.activity.MainActivity"
-            ></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".view.activity.SearchActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -1,22 +1,21 @@
 package db.movies.movies.model
 
-import db.movies.movies.contract.MoviesContract
 import db.movies.movies.contract.SearchContract
-import db.movies.movies.remote.MoviesService
 import db.movies.movies.remotey.RetrofitClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class MoviesListModel : MoviesContract.Model {
-    override fun getMovies(OnFinishedListener: MoviesContract.Model.OnFinishedListener, page: Int, genre: Int) {
-        RetrofitClient.getClient().getMoviesByGenre(genre, page).subscribeOn(Schedulers.io())
+class SearchListModel : SearchContract.Model{
+
+    override fun searchMovies(OnFinishedListener: SearchContract.Model.OnFinishedListener, page: Int, query: String) {
+        RetrofitClient.getClient().searchMovies(query, page).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({
                     OnFinishedListener.onFinished(
                             it.body()?.movies ?: arrayListOf(),
                             it.body()?.page ?: 1,
-                            it.body()?.totalPages ?: 1,
-                            genre)
+                            it.body()?.totalPages ?: 1
+                    )
                 },{
                     OnFinishedListener.onFailure(it)
                 })
