@@ -1,5 +1,6 @@
 package db.movies.movies.view.activity
 
+import android.arch.persistence.room.Room
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
@@ -8,6 +9,7 @@ import db.movies.movies.R
 import db.movies.movies.model.BancoClient
 import db.movies.movies.model.BancoLocal
 import db.movies.movies.model.Movie
+import db.movies.movies.model.MovieDB
 import db.movies.movies.view.adapter.MoviesAdapter
 import db.movies.movies.view.fragment.MoviesDelegate
 import kotlinx.android.synthetic.main.activity_favorites.*
@@ -21,10 +23,15 @@ class FavoritesActivity : BaseActivity(), MoviesDelegate {
     override fun unfavoriteMovie(movie: Movie) {
         moviesAdapter.movies.remove(movie)
         moviesAdapter.notifyDataSetChanged()
+        val dbMovie = MovieDB(movie.id, movie.overview, movie.posterPath, movie.title, movie.voteAverage)
+        async {
+            banco.MovieDAO().deleteHumor(dbMovie)
+        }
     }
 
     var lista = arrayListOf<Movie>()
     lateinit var moviesAdapter: MoviesAdapter
+    private lateinit var banco : BancoLocal
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +47,7 @@ class FavoritesActivity : BaseActivity(), MoviesDelegate {
 //            lista.addAll(intent.extras["favorites"] as ArrayList<Movie>)
 //            setDataToRecyclerView(lista)
 //        }
+        banco = Room.databaseBuilder(applicationContext, BancoLocal::class.java, "local_storage").build()
 
         async {
             val teste = BancoClient.getDatabase(applicationContext).MovieDAO().getHumor()

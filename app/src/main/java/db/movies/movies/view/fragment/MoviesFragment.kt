@@ -42,8 +42,8 @@ class MoviesFragment : Fragment(), MoviesDelegate, MoviesContract.View {
         val dbMovie = MovieDB(movie.id, movie.overview, movie.posterPath, movie.title, movie.voteAverage)
         async{
 
+            banco.MovieDAO().deleteHumor(dbMovie)
         }
-        banco.MovieDAO().deleteHumor(dbMovie)
     }
 
     override fun favoriteMovie(movie: Movie) {

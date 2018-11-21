@@ -18,7 +18,7 @@
         <activity
             android:name=".view.activity.SplashActivity"
             android:noHistory="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,7 +38,7 @@
             android:parentActivityName=".view.activity.MainActivity" />
         <activity
             android:name=".view.activity.LoginActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:parentActivityName=".view.activity.MainActivity"
             android:label="Autores"
