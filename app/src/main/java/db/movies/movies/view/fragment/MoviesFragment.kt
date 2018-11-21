@@ -139,5 +139,7 @@ class MoviesFragment : Fragment(), MoviesDelegate, MoviesContract.View {
 
     override fun onResponseFailure(t: Throwable) {
         Toast.makeText(context, "Não foi possível obter os dados.", Toast.LENGTH_LONG).show()
+
+        hideRefresh()
     }
 }
