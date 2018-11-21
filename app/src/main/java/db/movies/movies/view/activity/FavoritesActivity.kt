@@ -26,7 +26,7 @@ class FavoritesActivity : BaseActivity(), MoviesDelegate {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favorites)
-        moviesAdapter = MoviesAdapter(this)
+        moviesAdapter = MoviesAdapter(this, false)
         moviesAdapter.movies = ArrayList()
         movies_list.adapter = moviesAdapter
         movies_list.layoutManager = GridLayoutManager(this, 2)

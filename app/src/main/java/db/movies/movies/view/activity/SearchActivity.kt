@@ -20,6 +20,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.movie_list_item.*
 import java.util.concurrent.TimeUnit
 
 class SearchActivity : BaseActivity(), MoviesDelegate, SearchContract.View {
@@ -44,11 +45,12 @@ class SearchActivity : BaseActivity(), MoviesDelegate, SearchContract.View {
     }
 
     private fun initView(){
-        moviesAdapter = MoviesAdapter(this)
+        moviesAdapter = MoviesAdapter(this, true)
         moviesAdapter.movies = ArrayList()
         movies_list.adapter = moviesAdapter
         movies_list.layoutManager = GridLayoutManager(this, 2)
         movies_list.itemAnimator = DefaultItemAnimator()
+        fav_icon.visibility = View.GONE
     }
     override fun setDataToRecyclerView(movies: ArrayList<Movie>, page: Int, totalPages: Int) {
         setParametersPagination(page, totalPages)

@@ -64,7 +64,7 @@ class MoviesFragment : Fragment(), MoviesDelegate, MoviesContract.View {
     }
 
     private fun initView(){
-        moviesAdapter = MoviesAdapter(this)
+        moviesAdapter = MoviesAdapter(this, false)
         moviesAdapter.movies = ArrayList()
         movies_list.adapter = moviesAdapter
         movies_list.layoutManager = GridLayoutManager(context, 2)

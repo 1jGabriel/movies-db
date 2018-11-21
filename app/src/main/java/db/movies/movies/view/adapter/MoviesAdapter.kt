@@ -16,7 +16,7 @@ import db.movies.movies.view.fragment.MoviesDelegate
 import kotlinx.android.synthetic.main.movie_list_item.view.*
 import kotlin.properties.Delegates
 
-class MoviesAdapter(val delegates : MoviesDelegate) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
+class MoviesAdapter(val delegates : MoviesDelegate, val search : Boolean?) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
     var movies by Delegates.observable(ArrayList<Movie>()) { _, _, _ ->
         this.notifyDataSetChanged()
     }
@@ -66,6 +66,10 @@ class MoviesAdapter(val delegates : MoviesDelegate) : RecyclerView.Adapter<Movie
                 it.background = ContextCompat.getDrawable(parent.context, R.drawable.ic_star_yellow )
                 movie.favorite = true
                 delegates.favoriteMovie(movie)
+            }
+
+            if(search == true){
+                holder.favorite.visibility = View.GONE
             }
         }
     }
