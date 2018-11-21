@@ -24,6 +24,7 @@ class AutoresActivity : AppCompatActivity() {
         }
 
         emailSergio.setSafeOnClickListener {
+
             sendEmail("serginhoaquiles@gmail.com")
         }
 
@@ -35,8 +36,7 @@ class AutoresActivity : AppCompatActivity() {
 
     fun sendEmail(email : String){
         val intent = Intent(Intent.ACTION_SENDTO)
-        intent.data = Uri.parse("mailto:") // only email apps should handle this
-        intent.putExtra(Intent.EXTRA_EMAIL, email)
+        intent.data = Uri.parse("mailto:$email") // only email apps should handle this
         intent.putExtra(Intent.EXTRA_SUBJECT,"Feedback")
         if (intent.resolveActivity(this.packageManager) != null) {
             startActivity(intent)
