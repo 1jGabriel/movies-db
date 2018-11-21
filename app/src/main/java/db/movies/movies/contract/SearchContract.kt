@@ -14,7 +14,6 @@ interface SearchContract {
     interface View{
         fun setDataToRecyclerView(movies: ArrayList<Movie>, page: Int, totalPages: Int)
         fun onResponseFailure(t: Throwable)
-
     }
 
     interface Presenter {

@@ -29,8 +29,17 @@
             android:name=".view.activity.DetailActivity"
             android:parentActivityName=".view.activity.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".view.activity.SearchActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".view.activity.SearchActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:parentActivityName=".view.activity.MainActivity"
+            android:name=".view.activity.FavoritesActivity"
+            android:label="Favoritos"></activity>
+
+        <activity android:name=".view.activity.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            ></activity>
     </application>
 
 </manifest>

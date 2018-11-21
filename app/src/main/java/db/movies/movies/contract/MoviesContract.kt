@@ -16,6 +16,7 @@ interface MoviesContract {
         fun hideProgress()
         fun setDataToRecyclerView(movies: ArrayList<Movie>, page: Int, totalPages: Int, genre: Int)
         fun onResponseFailure(t: Throwable)
+        fun hideRefresh()
 
     }
 

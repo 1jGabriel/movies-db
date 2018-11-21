@@ -19,6 +19,15 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/img_height_200" />
 
+        <ImageButton
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/fav_icon"
+            android:background="@drawable/ic_star_border"
+            android:layout_marginEnd="@dimen/margin_4"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
         <TextView
             android:layout_margin="@dimen/margin_4"
             android:gravity="center_vertical"
