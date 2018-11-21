@@ -12,15 +12,10 @@ import db.movies.movies.contract.SearchContract
 import db.movies.movies.model.Movie
 import db.movies.movies.presenter.SearchPresenter
 import db.movies.movies.utils.InfiniteScrollListener
-import db.movies.movies.utils.hideView
-import db.movies.movies.utils.showView
 import db.movies.movies.view.adapter.MoviesAdapter
 import db.movies.movies.view.fragment.MoviesDelegate
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_search.*
-import kotlinx.android.synthetic.main.movie_list_item.*
+import setSafeOnClickListener
 import java.util.concurrent.TimeUnit
 
 class SearchActivity : BaseActivity(), MoviesDelegate, SearchContract.View {
@@ -84,10 +79,10 @@ class SearchActivity : BaseActivity(), MoviesDelegate, SearchContract.View {
                         this.getDataFromServer()
                     }
                 }
-        back_btn.setOnClickListener {
+        back_btn.setSafeOnClickListener {
             finish()
         }
-        clear_btn.setOnClickListener {
+        clear_btn.setSafeOnClickListener {
             text_input_busca.text.clear()
             moviesAdapter.movies.clear()
         }

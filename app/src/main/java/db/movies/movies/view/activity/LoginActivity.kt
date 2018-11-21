@@ -6,13 +6,14 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import db.movies.movies.R
 import kotlinx.android.synthetic.main.activity_tela_login.*
+import setSafeOnClickListener
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tela_login)
 
-        btLogar.setOnClickListener {
+        btLogar.setSafeOnClickListener {
             if (etLogin!!.text.toString() == "teste" && etSenha!!.text.toString() == "123") {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)

@@ -7,7 +7,7 @@ import db.movies.movies.R
 import db.movies.movies.model.Movie
 import kotlinx.android.synthetic.main.activity_detail.*
 import android.content.Intent
-
+import setSafeOnClickListener
 
 
 class DetailActivity : BaseActivity() {
@@ -26,17 +26,12 @@ class DetailActivity : BaseActivity() {
 
         title = movie.title
 
-        share_btn.setOnClickListener {
+        share_btn.setSafeOnClickListener {
             shareMovie()
         }
-
-
-
-
     }
 
     private fun shareMovie() {
-        val movie_imdb = "http://www.imdb.com/title/"+ movie.id
         if (movie.title != null || movie.voteAverage!=null|| !movie.id.equals(null)) {
             val myIntent = Intent(Intent.ACTION_SEND)
             myIntent.type = "text/plain"

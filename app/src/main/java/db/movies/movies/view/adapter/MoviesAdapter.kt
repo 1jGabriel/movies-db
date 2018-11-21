@@ -14,6 +14,7 @@ import db.movies.movies.R
 import db.movies.movies.model.Movie
 import db.movies.movies.view.fragment.MoviesDelegate
 import kotlinx.android.synthetic.main.movie_list_item.view.*
+import setSafeOnClickListener
 import kotlin.properties.Delegates
 
 class MoviesAdapter(val delegates : MoviesDelegate, val search : Boolean?) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
@@ -52,11 +53,11 @@ class MoviesAdapter(val delegates : MoviesDelegate, val search : Boolean?) : Rec
                 .load(BuildConfig.SERVER_URL_IMAGE + movie.posterPath).error(R.drawable.ic_movies)
                 .into(holder.posterMovie)
 
-        holder.itemView.setOnClickListener {
+        holder.itemView.setSafeOnClickListener {
             delegates.detailMovie(movie)
         }
 
-        holder.favorite.setOnClickListener {
+        holder.favorite.setSafeOnClickListener {
 
             if(movie.favorite){
 

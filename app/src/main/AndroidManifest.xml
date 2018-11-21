@@ -33,13 +33,16 @@
             android:name=".view.activity.SearchActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:parentActivityName=".view.activity.MainActivity"
             android:name=".view.activity.FavoritesActivity"
-            android:label="Favoritos"></activity>
-
-        <activity android:name=".view.activity.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            ></activity>
+            android:label="Favoritos"
+            android:parentActivityName=".view.activity.MainActivity" />
+        <activity
+            android:name=".view.activity.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:parentActivityName=".view.activity.MainActivity"
+            android:label="Autores"
+            android:name=".view.activity.AutoresActivity"></activity>
     </application>
 
 </manifest>
