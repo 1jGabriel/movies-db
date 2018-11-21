@@ -10,6 +10,7 @@ class MoviesPresenter(val view : MoviesContract.View) : MoviesContract.Presenter
 
     override fun onFinished(movies: ArrayList<Movie>, page: Int, totalPages: Int, genre: Int) {
         view.setDataToRecyclerView(movies, page, totalPages, genre)
+        view.hideRefresh()
     }
 
     override fun onFailure(t: Throwable) {

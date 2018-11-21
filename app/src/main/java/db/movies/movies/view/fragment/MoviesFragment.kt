@@ -17,16 +17,28 @@ import db.movies.movies.presenter.MoviesPresenter
 import db.movies.movies.utils.InfiniteScrollListener
 import db.movies.movies.utils.hideView
 import db.movies.movies.utils.showView
+import db.movies.movies.view.activity.BaseActivity
 import db.movies.movies.view.activity.DetailActivity
+import db.movies.movies.view.activity.MainActivity
 import db.movies.movies.view.adapter.MoviesAdapter
 import kotlinx.android.synthetic.main.fragment_movies.*
 
 
 interface MoviesDelegate{
     fun detailMovie(movie: Movie)
+    fun favoriteMovie(movie : Movie)
+    fun unfavoriteMovie(movie: Movie)
+
 }
 
 class MoviesFragment : Fragment(), MoviesDelegate, MoviesContract.View {
+    override fun favoriteMovie(movie: Movie) {
+        (activity as BaseActivity).listaFavoritos.add(movie)
+    }
+
+    override fun unfavoriteMovie(movie: Movie) {
+        (activity as BaseActivity).listaFavoritos.remove(movie)
+    }
 
     lateinit var idGenre : GenresMoviesEnum
     lateinit var moviesAdapter: MoviesAdapter
@@ -44,6 +56,7 @@ class MoviesFragment : Fragment(), MoviesDelegate, MoviesContract.View {
         initView()
         setListeners()
         getDataFromServer()
+
     }
 
     private fun getDataFromServer() {
@@ -56,6 +69,12 @@ class MoviesFragment : Fragment(), MoviesDelegate, MoviesContract.View {
         movies_list.adapter = moviesAdapter
         movies_list.layoutManager = GridLayoutManager(context, 2)
         movies_list.itemAnimator = DefaultItemAnimator()
+    }
+
+    override fun hideRefresh() {
+        if(swipeRefreshLayout.isRefreshing){
+            swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     private fun setListeners(){
@@ -74,6 +93,14 @@ class MoviesFragment : Fragment(), MoviesDelegate, MoviesContract.View {
                 }
             }
         })
+
+        swipeRefreshLayout.setOnRefreshListener {
+            moviesAdapter.movies.clear()
+            offset = 1
+            totalPages = 1
+            getDataFromServer()
+        }
+
     }
 
     companion object {

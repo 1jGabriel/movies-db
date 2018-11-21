@@ -1,9 +1,10 @@
 package db.movies.movies.model
 
+import com.chibatching.kotpref.KotprefModel
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class Movie(
+class Movie (
         @SerializedName("adult") val adult: Boolean,
         @SerializedName("backdrop_path") val backdropPath: String?,
         @SerializedName("genre_ids") val genreIds: List<Int>?,
@@ -17,5 +18,6 @@ data class Movie(
         @SerializedName("title") val title: String?,
         @SerializedName("video") val video: Boolean?,
         @SerializedName("vote_average") val voteAverage: Double?,
-        @SerializedName("vote_count") val voteCount: Int?
+        @SerializedName("vote_count") val voteCount: Int?,
+        var favorite : Boolean = false
 ) : Serializable

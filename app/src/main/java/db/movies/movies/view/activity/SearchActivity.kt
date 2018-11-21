@@ -23,6 +23,13 @@ import kotlinx.android.synthetic.main.activity_search.*
 import java.util.concurrent.TimeUnit
 
 class SearchActivity : BaseActivity(), MoviesDelegate, SearchContract.View {
+    override fun unfavoriteMovie(movie: Movie) {
+        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun favoriteMovie(movie: Movie) {
+        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     lateinit var moviesAdapter: MoviesAdapter
     private var offset = 1
