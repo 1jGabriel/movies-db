@@ -1,5 +1,6 @@
 package db.movies.movies.view.fragment
 
+import android.arch.persistence.room.Room
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -12,7 +13,10 @@ import android.widget.Toast
 import db.movies.movies.R
 import db.movies.movies.contract.MoviesContract
 import db.movies.movies.enums.GenresMoviesEnum
+import db.movies.movies.model.BancoClient
+import db.movies.movies.model.BancoLocal
 import db.movies.movies.model.Movie
+import db.movies.movies.model.MovieDB
 import db.movies.movies.presenter.MoviesPresenter
 import db.movies.movies.utils.InfiniteScrollListener
 import db.movies.movies.utils.hideView
@@ -22,6 +26,7 @@ import db.movies.movies.view.activity.DetailActivity
 import db.movies.movies.view.activity.MainActivity
 import db.movies.movies.view.adapter.MoviesAdapter
 import kotlinx.android.synthetic.main.fragment_movies.*
+import org.jetbrains.anko.async
 
 
 interface MoviesDelegate{
@@ -31,20 +36,33 @@ interface MoviesDelegate{
 
 }
 
-class
-MoviesFragment : Fragment(), MoviesDelegate, MoviesContract.View {
-    override fun favoriteMovie(movie: Movie) {
-        (activity as BaseActivity).listaFavoritos.add(movie)
-    }
-
+class MoviesFragment : Fragment(), MoviesDelegate, MoviesContract.View {
     override fun unfavoriteMovie(movie: Movie) {
         (activity as BaseActivity).listaFavoritos.remove(movie)
+        val dbMovie = MovieDB(movie.id, movie.overview, movie.posterPath, movie.title, movie.voteAverage)
+        async{
+
+        }
+        banco.MovieDAO().deleteHumor(dbMovie)
+    }
+
+    override fun favoriteMovie(movie: Movie) {
+        (activity as BaseActivity).listaFavoritos.add(movie)
+        val dbMovie = MovieDB(movie.id, movie.overview, movie.posterPath, movie.title, movie.voteAverage)
+
+        async {
+
+            banco.MovieDAO().insertMovie(dbMovie)
+        }
+
     }
 
     lateinit var idGenre : GenresMoviesEnum
     lateinit var moviesAdapter: MoviesAdapter
     private var offset = 1
     private var totalPages = 1
+
+    private lateinit var banco : BancoLocal
 
     private var moviesPresenter = MoviesPresenter(this)
 
@@ -54,6 +72,7 @@ MoviesFragment : Fragment(), MoviesDelegate, MoviesContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        banco = Room.databaseBuilder(context!!.applicationContext!!, BancoLocal::class.java, "local_storage").build()
         initView()
         setListeners()
         getDataFromServer()

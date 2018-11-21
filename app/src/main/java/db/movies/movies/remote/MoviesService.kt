@@ -15,4 +15,5 @@ interface MoviesService {
     @GET("search/movie")
     fun searchMovies(@Query("query")query : String ,
                      @Query("page") page : Int) : Observable<Response<MovieResponse>>
+
 }

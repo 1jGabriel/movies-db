@@ -1,12 +1,12 @@
 package db.movies.movies.view.activity
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.support.v7.app.AppCompatActivity
 import db.movies.movies.R
 
-class SplashActivity : Activity() {
+class SplashActivity : AppCompatActivity() {
     private var mDelayHandler: Handler? = null
     private val splashDelay: Long = 3000
 

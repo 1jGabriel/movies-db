@@ -2,13 +2,12 @@ package db.movies.movies.view.activity
 
 import android.content.Intent
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import db.movies.movies.R
 import kotlinx.android.synthetic.main.activity_autores.*
 import setSafeOnClickListener
 
-class AutoresActivity : AppCompatActivity() {
+class AutoresActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +31,6 @@ class AutoresActivity : AppCompatActivity() {
             sendEmail("vitorsimoes09@hotmail.com")
         }
     }
-
 
     fun sendEmail(email : String){
         val intent = Intent(Intent.ACTION_SENDTO)
